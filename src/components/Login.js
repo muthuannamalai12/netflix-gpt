@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import validateData from "../utils/validate";
 import { auth } from "../utils/firebase";
@@ -10,10 +9,11 @@ import {
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { USER_AVATAR } from "../utils/constants";
+import { LOGO } from "../utils/constants";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [isSignInForm, setIsSignInForm] = useState(true);
   //   const [emailId, setEmailId] = useState(null);
   //   const [password, setPassword] = useState(null);
@@ -84,8 +84,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(auth.currentUser, {
             displayName: firstName.current.value,
-            photoURL:
-              "https://avatars.githubusercontent.com/u/64524822?v=4&size=64",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               //   const { uuid, email, displayName, photoURL } = user;
@@ -104,7 +103,6 @@ const Login = () => {
               setErrorMessage(error.message);
             });
           //   console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -121,7 +119,6 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           //   console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -135,10 +132,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/03ad76d1-e184-4d99-ae7d-708672fa1ac2/web/IN-en-20241111-TRIFECTA-perspective_149877ab-fcbd-4e4f-a885-8d6174a1ee81_large.jpg"
-          alt="backround-image"
-        />
+        <img src={LOGO} alt="backround-image" />
       </div>
       <div>
         <form
