@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import VideoTitle from "./VideoTitle.js";
 import VideoBackground from "./VideoBackground.js";
 import { useSelector } from "react-redux";
-import useMovieTrailer from "../hooks/useMovieTrailer.js";
 
 const MainComponent = () => {
   const movies = useSelector((store) => store?.movies?.nowPlayingMovies);
